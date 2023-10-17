@@ -6,7 +6,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {characters: []};
+		this.state = {characters: [], characterSelected: {}};		
 		this.onDetail = this.onDetail.bind(this);
 	}
 
@@ -18,16 +18,22 @@ class App extends React.Component {
 
 	render() { 
 		return (
-			<CharacterList 
-				characters={this.state.characters}
-				onDetail={this.onDetail}/>
+			<div>
+				<CharacterList 
+					characters={this.state.characters}
+					onDetail={this.onDetail}>			
+				</CharacterList>
+				<CharacterDetail character={this.state.characterSelected}/>
+			</div>
 		)
 	}
 	
 	onDetail(character) {
 		let uri = 'http://localhost:8080/api/characters/' + character.id;
 		client({method: 'GET', path: uri}).done(response => {			
-			console.log(response.entity.data);
+			console.log(response.entity.data);	
+			let elem = response.entity.data.results[0]; 				
+			this.setState( {characterSelected: elem});		
 		});
 	}		
 }
@@ -68,12 +74,35 @@ class Character extends React.Component{
 	render() {
 		return (
 			<tr>
-				<td><a href="#" onClick={this.handleDetail}>{this.props.character.id} </a></td>
+				<td><a href="#characterDetail" onClick={this.handleDetail}>{this.props.character.id} </a></td>
 				<td>{this.props.character.name}</td>
 				<td>{this.props.character.description}</td>
 			</tr>
 		)
 	}
+}
+
+class CharacterDetail extends React.Component {
+	constructor(props) {
+		super(props);		
+	}
+	
+	render() {
+		return (
+			<div>							
+				<div id="characterDetail" className="modalDialog">
+					<div>
+						<a href="#" title="Close" className="close">X</a>
+						<h2></h2>
+						<form>
+							<h2>{this.props.character.id}</h2>				
+						</form>
+					</div>
+				</div>
+			</div>
+		)
+	}
+	
 }
 
 ReactDOM.render(
