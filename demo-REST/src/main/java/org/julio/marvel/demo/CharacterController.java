@@ -39,7 +39,7 @@ public class CharacterController {
 	RestTemplate restTemplate;
 	
 	@GetMapping(value= {"/api/characters", "/api/characters/{id}"})
-	public CharacterDataWrapper characters(@PathVariable Optional<Integer> characterId) 
+	public CharacterDataWrapper characters(@PathVariable(name = "id") Optional<Integer> characterId) 
 			throws RestClientException, NoSuchAlgorithmException {	
 		return restTemplate.getForObject(buildMarvelRequest(characterId),
 				CharacterDataWrapper.class);

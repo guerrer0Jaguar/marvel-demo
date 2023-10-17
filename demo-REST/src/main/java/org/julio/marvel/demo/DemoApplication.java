@@ -28,6 +28,8 @@ public class DemoApplication {
 				registry
 					.addMapping("/api/characters")
 					.allowedOrigins("http://localhost:7080");
+				registry.addMapping("/api/characters/*")
+					.allowedOrigins("http://localhost:7080");
 			}
 		};
 	}
