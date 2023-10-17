@@ -38,7 +38,7 @@ public class CharacterController {
 	@Autowired
 	RestTemplate restTemplate;
 	
-	@GetMapping(value= {"/characters", "/characters/{id}"})
+	@GetMapping(value= {"/api/characters", "/api/characters/{id}"})
 	public CharacterDataWrapper characters(@PathVariable Optional<Integer> characterId) 
 			throws RestClientException, NoSuchAlgorithmException {	
 		return restTemplate.getForObject(buildMarvelRequest(characterId),
@@ -72,5 +72,4 @@ public class CharacterController {
 		
 		return String.format("%032x", new BigInteger(1, digest));
 	}
-
 }
