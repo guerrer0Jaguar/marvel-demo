@@ -6,7 +6,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {characters: [], characterSelected: {}};		
+		this.state = {characters: [], characterSelected: {thumbnail:{path:'', extension:''} }};		
 		this.onDetail = this.onDetail.bind(this);
 	}
 
@@ -51,8 +51,7 @@ class CharacterList extends React.Component{
 				<tbody>
 					<tr>
 						<th>ID</th>
-						<th>Name</th>
-						<th>Description</th>
+						<th>Name</th>						
 					</tr>
 					{characters}
 				</tbody>
@@ -75,8 +74,7 @@ class Character extends React.Component{
 		return (
 			<tr>
 				<td><a href="#characterDetail" onClick={this.handleDetail}>{this.props.character.id} </a></td>
-				<td>{this.props.character.name}</td>
-				<td>{this.props.character.description}</td>
+				<td>{this.props.character.name}</td>				
 			</tr>
 		)
 	}
@@ -92,11 +90,26 @@ class CharacterDetail extends React.Component {
 			<div>							
 				<div id="characterDetail" className="modalDialog">
 					<div>
-						<a href="#" title="Close" className="close">X</a>
-						<h2></h2>
-						<form>
-							<h2>{this.props.character.id}</h2>				
-						</form>
+						<a href="#" title="Close" className="close">X</a>						
+						<h2>{this.props.character.name}</h2>		
+						<img width="200px" height="200px" 
+							src={this.props.character.thumbnail.path + '.'+ this.props.character.thumbnail.extension} />	
+						<table>
+							<tbody>
+								<tr>
+									<td>ID:</td>			
+									<td>{this.props.character.id}</td>
+								</tr>
+								<tr>
+									<td>Description:</td>
+									<td>{this.props.character.description}</td>
+								</tr>
+								<tr>
+									<td>Modified:</td>
+									<td>{this.props.character.modified}</td>
+								</tr>
+							</tbody>
+						</table>								
 					</div>
 				</div>
 			</div>
