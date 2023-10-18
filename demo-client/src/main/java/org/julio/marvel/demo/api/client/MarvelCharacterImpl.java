@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.julio.marvel.demo.model.CharacterDataWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -26,9 +26,8 @@ public class MarvelCharacterImpl implements MarvelCharacter{
 	private String publicKey;
 	@Value("${marvel.api.key}")
 	private String apiKey;
-	
-	@Autowired
-	RestTemplate restTemplate;
+		
+	RestTemplate restTemplate = new RestTemplateBuilder().build();
 
 
 	@Override
