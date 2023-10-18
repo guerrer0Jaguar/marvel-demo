@@ -1,4 +1,4 @@
-package org.julio.marvel.example.demo;
+package org.julio.marvel.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
